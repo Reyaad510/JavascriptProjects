@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    hi
+    
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -62,6 +62,13 @@
       background: black;
       position: absolute;
       top: 50%;
+      /* Below makes the hands pivot from the middle of the circle */
+      transform-origin: 100%;
+      /* Below makes hands all point to 12 o clock */
+      transform: rotate(90deg);
+      /* Allows fluid movement of hands */
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(0.42, 0, 0, 3.12);
     }
 
   </style>
