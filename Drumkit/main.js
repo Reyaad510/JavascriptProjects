@@ -15,6 +15,15 @@
         audio.play();
         // key.classList.remove('playing');
         // key.classList.toggle('playing');
+        // Below adds the 'playing' class that is located in our css
         key.classList.add('playing');
         
     });
+
+    function removeTransition(e) {
+        if(e.propertyName !== 'transform') return; // skip if it's not a transform
+        this.classList.remove('playing');
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition))
