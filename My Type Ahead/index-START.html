@@ -23,6 +23,36 @@ fetch(endpoint)
 .then(blob => blob.json())
 .then(data => cities.push(...data));
 
+function findMatches(wordToMatch, cities) {
+  return cities.filter(place => {
+    // here we need to figure out if city or state matches what was searched
+    // g is global and i is insensitive meaning going to match lower and uppercase
+    const regex = new RegExp(wordToMatch, 'gi');
+    return place.city.match(regex) || place.state.match(regex);
+  })
+}
+
+
+function displayMatches() {
+  const matchArray = findMatches(this.value, cities);
+  const html = matchArray.map(place => {
+    return `
+    <li>
+    <span class="name">${place.city}, ${place.state}</span>
+    <span class="population"> ${place.population}</span>
+    </li>
+    `;
+  }).join('');
+  suggestions.innerHTML = html;
+}
+
+
+const searchInput = document.querySelector('.search')
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
+
 
 </script>
 </body>
