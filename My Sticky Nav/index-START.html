@@ -10,7 +10,7 @@
   <header>
     <h1>A story about getting lost.</h1>
   </header>
-  hi
+  
   <nav id="main">
     <ul>
       <li class="logo"><a href="#">LOST.</a></li>
@@ -54,6 +54,15 @@
   </div>
 
 <script>
+  // offsetTop tells how much pixels that the top of nav is from top 
+
+  const nav = document.querySelector('#main');
+  const topOfNav = nav.offsetTop;
+  function fixNav() {
+    console.log(topOfNav);
+  }
+
+  window.addEventListener('scroll', fixNav);
 
 </script>
 
