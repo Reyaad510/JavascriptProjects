@@ -55,7 +55,7 @@
       flex: 1;
       cursor: pointer;
     }
-
+    /* For the Taco */
     .plates input {
       display: none;
     }
