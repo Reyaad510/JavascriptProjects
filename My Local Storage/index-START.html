@@ -28,7 +28,8 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  // Allows refresh page and data will be there on page load and if not will fallback to empty array.
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
   function addItem(e) {
     // prevent page from reloading
@@ -40,6 +41,8 @@
     };
     items.push(item);
     populateList(items, itemsList);
+    // Stores items in local storage as a string in local storage. 
+    localStorage.setItem('items', JSON.stringify(items));
     // Resets after you click submit button
     this.reset();
   }
@@ -55,7 +58,21 @@
     }).join('');
   }
 
+  function toggleDone(e) {
+    // skip this unles it's an input
+     if(!e.target.matches('input')) return;
+     const el = e.target;
+     const index = el.dataset.index;
+     items[index].done = !items[index].done;
+     localStorage.setItem('items', JSON.stringify(items));
+     populateList(items, itemsList);
+
+  }
+
   addItems.addEventListener('submit', addItem)
+  itemsList.addEventListener('click', toggleDone);
+//  When page loads
+  populateList(items, itemsList);
 
 </script>
 
